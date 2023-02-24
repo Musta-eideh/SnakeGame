@@ -9,14 +9,15 @@
 </head>
 
 <body>
-    <canvas id="stage" width="600" height="600"></canvas>
+    <canvas id="stage" width="400" height="400"></canvas>
 
     <script type="text/javascript">
         window.onload = function() {
             var stage= document.getElementById('stage');
             var ctx= stage.getContext("2d"); 
+            document.addEventListener("keydown",keyPush);
             
-            setInterval(game, 60);
+            setInterval(game, 90);
 
             const vel = 1;
             var vx = vy = 0;
@@ -48,8 +49,52 @@
                 }
 
 
-            ctx.fillStyle = "black"; //Fundo
-            ctx.fillRect(0,0, stage.width, stage.height);
+                ctx.fillStyle = "black"; //Fundo
+                ctx.fillRect(0,0, stage.width, stage.height);
+                ctx.fillStyle = "red";
+                ctx.fillRect(ax*tp, ay*tp, tp, tp)
+
+                ctx.fillStyle = "gray";
+                for(var i = 0; i < trail.length; i++){
+                    ctx.fillRect(trail[i].x*tp, trail[i].y*tp, tp, tp);
+                     if(trail[i].x == px && trail[i].y == py){//game over
+                        // alert('Game Over🥲')
+                        vx = vy = 0;
+                        tail = 5;
+                     }
+                }
+                trail.push({x:px, y:py}); //rastro na tela
+                while(trail.length > tail) {
+                    //Confirmando 
+                    trail.shift();
+                }
+                if( ax == px && ay == py) {
+                    tail++;
+                    ax = Math.floor(Math.random()*qp);
+                    ay = Math.floor(Math.random()*qp);
+                }
+            }
+            function keyPush(event) {
+                switch(event.keyCode) {
+                    case 37: //Left
+                        vx = -vel;
+                        vy = 0;
+                    break;
+                    case 38: //Up
+                        vx = 0;
+                        vy = -vel;
+                    break;
+                    case 39: //Right
+                        vx = vel;
+                        vy = 0;
+                    break;
+                    case 40: //Down
+                        vx = 0;
+                        vy = vel;
+                    break;
+                    default:
+                    break
+                }
             }
         }
     </script>
