@@ -1,14 +1,58 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Snake Game</title>
-    <link rel="stylesheet" href="/assets/css/style.css">
 </head>
+
 <body>
     <canvas id="stage" width="600" height="600"></canvas>
-    <script src="/assets/js/script.js"></script>
+
+    <script type="text/javascript">
+        window.onload = function() {
+            var stage= document.getElementById('stage');
+            var ctx= stage.getContext("2d"); 
+            
+            setInterval(game, 60);
+
+            const vel = 1;
+            var vx = vy = 0;
+            var px = py= 10;
+            var tp = 20;
+            var qp = 20;
+            var ax = ay = 15;
+
+            var trail = [];
+            tail = 5; // Tamanho da calda
+
+            function game () {
+                px += vx;
+                py += vy;
+                if(px < 0) {
+                    px = qp -1;
+                }
+                if(px < 0) {
+                    px = qp -1;
+                }
+                if(px > qp -1) {
+                    px = 0;
+                }
+                if(py < 0) {
+                    py = qp -1;
+                }
+                if(py = qp-1){
+                    py = 0;
+                }
+
+
+            ctx.fillStyle = "black"; //Fundo
+            ctx.fillRect(0,0, stage.width, stage.height);
+            }
+        }
+    </script>
 </body>
+
 </html>
